@@ -1,0 +1,231 @@
+Network Messenger in Python
+A simple network messenger implemented in Python using a client-server architecture. It supports text messaging, file transfers, contact management, and listing online users without authentication.
+Table of Contents
+
+Features
+System Architecture
+Communication Protocol
+Use Cases
+Project Structure
+Installation and Running
+Usage Examples
+Limitations
+Scalability
+License
+
+Features
+
+📨 Text Messaging: Send and receive messages in real-time.
+🖼️ File Transfers: Send and receive files (e.g., images).
+👥 Contact Management: Add, remove, and view contacts.
+👀 Online Users List: Request a list of connected users.
+📩 Status Notifications: Get delivery status ("delivered", "offline").
+🏗️ Client-Server Architecture: Uses TCP with JSON messages.
+📜 Logging: Saves logs to messenger.log.
+
+System Architecture
+
+Clients: User programs (client.py) that send/receive messages, files, and manage contacts.
+Server: Central node (server.py) that routes data and manages connections.
+Protocol: TCP with JSON messages for flexibility and readability.
+
+Architecture Diagram:
++----------------------------------+
+| Client (Alice) |
+|----------------------------------|
+| - Connect to server |
+| - Send text/file |
+| - Manage contacts |
+| - Request online users |
++----------------------------------+
+| TCP/JSON
+v
++----------------------------------+
+| Server |
+|----------------------------------|
+| - Start server |
+| - Register client |
+| - Forward text/file |
+| - Handle contacts |
+| - Send online users |
++----------------------------------+
+| TCP/JSON
+v
++----------------------------------+
+| Client (Bob) |
+| (Same functions) |
++----------------------------------+
+
+Communication Protocol
+
+Format: JSON messages over TCP.
+Why JSON:
+Simple and readable.
+Built-in Python support (json library).
+Flexible for adding new fields.
+
+Message Types:{
+"type": "init|message|file|contact|online_users|status|error",
+"from": "sender_username",
+"to": "recipient_username",
+"payload": "message_or_hex_data",
+"filename": "file_name (optional)",
+"action": "add|remove|request (optional)",
+"users": ["user1", "user2"] (optional),
+"contact": "contact_username (optional)"
+}
+
+init: Client registration.
+message: Text message.
+file: File transfer.
+contact: Add/remove contact.
+online_users: Request/respond with user list.
+status: Delivery notification.
+error: Error message.
+
+Use Cases
+
+User Registration:
+
++-------------+ +-------------+
+| Client (Alice) | Server |
++-------------+ +-------------+
+| 1. Send init: |
+| {"type": "init", |
+| "username": "Alice"} |
+|----------------------------->|
+| | 2. Add Alice
+| | Log: "Alice connected"
+| 3. Confirmation: |
+| {"type": "status"} |
+|<-----------------------------|
++-------------+ +-------------+
+
+Sending a Text Message:
+
++-------------+ +-------------+ +-------------+
+| Client (Alice) | Server | | Client (Bob)|
++-------------+ +-------------+ +-------------+
+| 1. Send: | |
+| {"type": "message"} |----------------------------->|
+| | 2. Deliver to Bob |
+| | 3. Notify Alice: |
+| | {"type": "status"} |
+| |<-----------------------------|
++-------------+ +-------------+ +-------------+
+
+File Transfer:
+
++-------------+ +-------------+ +-------------+
+| Client (Alice) | Server | | Client (Bob)|
++-------------+ +-------------+ +-------------+
+| 1. Send: | |
+| {"type": "file"} |----------------------------->|
+| | 2. Deliver to Bob |
+| | 3. Notify Alice: |
+| | {"type": "status"} |
+| |<-----------------------------|
++-------------+ +-------------+ +-------------+
+
+Contact Management:
+
++-------------+ +-------------+ +-------------+
+| Client (Alice) | Server | | Client (Bob)|
++-------------+ +-------------+ +-------------+
+| 1. Send: | |
+| {"type": "contact"} |----------------------------->|
+| | 2. Deliver to Bob |
+| | 3. Notify Alice: |
+| | {"type": "status"} |
+| |<-----------------------------|
++-------------+ +-------------+ +-------------+
+
+Request Online Users:
+
++-------------+ +-------------+
+| Client (Alice) | Server |
++-------------+ +-------------+
+| 1. Send: |
+| {"type": "online_users"} |
+|----------------------------->|
+| | 2. Respond: ["Alice", "Bob"]
+| |<-----------------------------|
++-------------+ +-------------+
+
+Project Structure
+messenger_project/
+├── server.py # Server implementation
+├── client.py # Client implementation
+├── message_handler.py # Message routing
+├── utils.py # Utility functions
+├── config.json # Configuration
+├── README.md # Documentation
+└── requirements.txt # Dependencies
+
+Installation and Running
+Requirements
+
+Python 3.6+.
+No external dependencies.
+
+Installation
+
+Clone the repository:git clone <repository_url>
+cd messenger_project
+
+Running
+
+Server:python server.py
+
+Client (in separate terminals):python client.py
+
+Enter a username and commands:
+send: Send a message.
+file: Send a file.
+add_contact: Add a contact.
+remove_contact: Remove a contact.
+list_contacts: Show contacts.
+list_users: Show online users.
+exit: Quit.
+
+Usage Examples
+
+Registration:
+Enter your username: Alice
+Status: Registration successful
+
+Sending a Message:
+Enter command: send
+To: Bob
+Message: Hello!
+Status: Message to Bob delivered
+
+Sending a File:
+Enter command: file
+To: Bob
+File path: photo.jpg
+Status: Message to Bob delivered
+
+Adding a Contact:
+Enter command: add_contact
+Contact name: Bob
+Contact Bob added
+
+Requesting Online Users:
+Enter command: list_users
+Online users: Alice, Bob
+
+Limitations
+
+No data encryption.
+Message size limit (1024 bytes, requires fragmentation for large files).
+Contacts stored locally, reset on client exit.
+Thread-based model limits scalability.
+
+Scalability
+
+Asynchronous Processing: Switch to asyncio for thousands of clients.
+Storage: Use SQLite for contacts and offline messages.
+File Fragmentation: Split large files into chunks.
+Group Chats: Extend JSON protocol for groups.
+Monitoring: Integrate logs with analysis systems.

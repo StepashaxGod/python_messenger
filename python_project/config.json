@@ -1,0 +1,12 @@
+{
+  "comments": "Server listens to all interfaces",
+  "server": {
+    "host": "0.0.0.0", 
+    "port": 4444
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "messenger.log"
+  },
+  "note": "File needed for client for proper start."
+}
