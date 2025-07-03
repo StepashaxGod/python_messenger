@@ -1,0 +1,32 @@
+Getting started.
+
+1:
+In the column with protocols. all protocols of an psi model are displayed.
+From application layer - to ethernet.  
+
+2:
+Milliseconds, the reply is almost instant.
+
+3:
+Internet address address of the Gaia.cs.umass.edu is - 128.119.245.12.
+My pc address give by my router is - 192.168.0.6
+
+4:
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36\r\n
+
+
+5:
+Dest port - 80
+
+6:
+GET / HTTP/1.1\r\n
+    Request Method: GET
+    Request URI: /
+    Request Version: HTTP/1.1
+
+HTTP/1.1 200 OK\r\n
+    Response Version: HTTP/1.1
+    Status Code: 200
+    [Status Code Description: OK]
+    Response Phrase: OK
+

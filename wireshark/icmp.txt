@@ -1,0 +1,95 @@
+1:
+16:28:16.399675	192.168.0.6	143.89.209.9	ICMP	98	Echo (ping) request  id=0x7d47, seq=0/0, ttl=64 (reply in 3)
+
+2:
+ICMP is used at the network layer, dont have the ports like the udp or tcp.
+
+3:
+Type - 8, code - 0, Internet Control Message Protocol
+    Type: 8 (Echo (ping) request)
+    Code: 0
+    Checksum: 0xe481 [correct] (Checksum is 2 bytes or 16 bits)
+    [Checksum Status: Good]
+    Identifier (BE): 32071 (0x7d47) (To undestand to wich session it belongs, or an application, e.t.c) (2 bytes)
+    Identifier (LE): 18301 (0x477d)
+    Sequence Number (BE): 0 (0x0000) (to verify that the reply is sent to the correct request)
+    Sequence Number (LE): 0 (0x0000) (2 bytes)
+    [Response frame: 3]
+    Timestamp from icmp data: Jun 16, 2025 16:28:16.399581000 CEST
+    [Timestamp from icmp data (relative): 0.000094000 seconds]
+
+4: 
+Internet Control Message Protocol
+    Type: 0 (Echo (ping) reply)
+    Code: 0
+    Checksum: 0xec81 [correct] (2 bytes)
+    [Checksum Status: Good]
+    Identifier (BE): 32071 (0x7d47) (2 bytes)
+    Identifier (LE): 18301 (0x477d) (2 bytes)
+    Sequence Number (BE): 0 (0x0000)
+    Sequence Number (LE): 0 (0x0000)
+    [Request frame: 2]
+    [Response time: 244.288 ms]
+    Timestamp from icmp data: Jun 16, 2025 16:28:16.399581000 CEST
+    [Timestamp from icmp data (relative): 0.244382000 seconds]
+
+5:
+Host is my computer, meaning 192.168.0.6, destination is the end address 123.93.162.83
+
+6:
+Number of the protocol of course would be changed and the to 17(UDP)
+
+7:
+These are the TTL packets, with type 11
+
+8:
+Internet Control Message Protocol
+    Type: 11 (Time-to-live exceeded)
+    Code: 0 (Time to live exceeded in transit)
+    Checksum: 0xd884 [correct]
+    [Checksum Status: Good]
+    Unused: 00000000
+    Internet Protocol Version 4, Src: 192.168.0.6, Dst: 128.93.162.83
+        0100 .... = Version: 4
+        .... 0101 = Header Length: 20 bytes (5)
+        Differentiated Services Field: 0x00 (DSCP: CS0, ECN: Not-ECT)
+            0000 00.. = Differentiated Services Codepoint: Default (0)
+            .... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+        Total Length: 40
+        Identification: 0xc7ce (51150)
+        000. .... = Flags: 0x0
+            0... .... = Reserved bit: Not set
+            .0.. .... = Don't fragment: Not set
+            ..0. .... = More fragments: Not set
+        ...0 0000 0000 0000 = Fragment Offset: 0
+        Time to Live: 1
+            [Expert Info (Note/Sequence): "Time To Live" only 1]
+                ["Time To Live" only 1]
+                [Severity level: Note]
+                [Group: Sequence]
+        Protocol: UDP (17)
+        Header Checksum: 0x0e98 [validation disabled]
+        [Header checksum status: Unverified]
+        Source Address: 192.168.0.6
+        Destination Address: 128.93.162.83
+        [Stream index: 1]
+    User Datagram Protocol, Src Port: 51149, Dst Port: 33435
+        Source Port: 51149
+        Destination Port: 33435
+            [Expert Info (Chat/Sequence): Possible traceroute: hop #1, attempt #1]
+                [Possible traceroute: hop #1, attempt #1]
+                [Severity level: Chat]
+                [Group: Sequence]
+        Length: 20
+        Checksum: 0xd1fd [unverified]
+        [Checksum Status: Unverified]
+        [Stream index: 2]
+
+9:
+The last three reach the uni, with high TTL, and call port unreachable. Error packets have low ttl, the stop on the routers, and call time exceeded.
+
+10:
+Some take longer, cause they might get caught in a loop, or the traffic is high.
+Country - France.
+City - Paris.
+Institut National de Recherche en Informatique et Automatique

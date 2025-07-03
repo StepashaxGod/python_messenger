@@ -1,0 +1,25 @@
+Wireshark Lab: 
+UDP v8.1
+
+1. 
+Packet number 1; in the first udp segment the QUIC protocols message is transfered - transport protocol for the http 3, which works above the udp on port 443.8 bytes of headers 4 fields, Source port, Destination port, length, checksum. 
+
+2:
+2 bytes
+
+3:
+Payload + header 8 bytes = length, in my case payload =37 => 45 is the length.
+
+4:
+Max payload = 65527 byte
+
+5:
+65535
+
+6:
+17
+
+7:
+Packet 16
+Source port 52600 dest - 443 , packet - 17, source port 443, dest port 52600, udp sets the  connection between both, thats why it's changed.
+

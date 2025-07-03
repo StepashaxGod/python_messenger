@@ -1,0 +1,47 @@
+Wireshark LAB:
+TCP
+
+1: IP - 192.168.0.6, tcp port number - 51792
+
+2: destination port - 80; ip of the gaia - 128.119.245.12
+
+3:thats the syn, before the syn ack Sequence Number: 0    (relative sequence number), 
+Sequence Number (raw): 82767562
+
+4: syn ack segment - Sequence Number: 0    (relative sequence number)
+, Sequence Number (raw): 80558651, Acknowledgment Number: 1    (relative ack number)
+Basic tcp header, only 20 bytes
+ server => client ack + 1;
+
+5: TCP payload (1026 bytes), cant fit into dingle segment.
+
+6.sent     -    00:58:05.311338	192.168.0.6	128.119.245.12	HTTP	1092	POST
+  received - 	00:58:05.311698	128.119.245.12	192.168.0.6	TCP	66	80 → 51792 [ACK] Seq=1 Ack=73135 Win=175232 Len=0 
+  RTT = time received - time sent => 0.360 milliseconds ; second segment rtt and it'd ack => 0.361, 74583(random ack assigned)
+	Estimated rtt is the (1- a) * rtt1 + a * rtt2 = 0.360125 (miliseconds);
+
+7: 
+Data carrying - the ones that are sent by me to server ,I mean the 150 kb file, the first segment has 740 bytes of information, all the others have 1460+- ; 	
+
+8:
+28960 is the smallest buffer space, the first ack sent by the server. I was never throttled by the server. Opposite the server was 
+
+9:
+I have one duplicate ack -  147	00:58:05.075257	128.119.245.12	192.168.0.6	TCP	66	[TCP Dup ACK 146#1] 80 → 51792 [ACK] Seq=1 Ack=735 Win=30464 Len=0 TSval=1743115779 TSecr=2244945264 (out of order or missed segment) => the server asks for the 735th byte of information. no retransmitted files, checked in the graphs. 	
+
+10:
+Server typically acks the Len + 1 from the client, first ten => just sums the lengths, sew id the number that identifies how much info the server reviewed and what id the next byte for the client to provide.yeh,when server acknowledged my packet 765, but the straight up acknowledged the packet 3631. 
+
+11:
+Total bytes / time seconds =  150 kb/ 1.767s = 87 kilo bytes/ second. Packets before the fin(before the connection was closed)
+
+12: 
+We are always at the slow start, slowly doubling the amount of data that is sent by bursts, the server never throttled me, I never lost packets, therefore avoided congestion. kinda it. 
+
+13: 
+The data is sent in the bursts, 1rtt is the Time between the bursts. its a back to back communication, everyone had to receive the ack.
+
+14:
+
+    
+ 

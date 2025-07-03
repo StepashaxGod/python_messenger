@@ -1,0 +1,76 @@
+HTTP lab 
+
+1:
+Request version 1.1
+Server running HTTP1.1
+
+2:
+Accept-Language: en-GB,en-US;q=0.9,en;q=0.8,ru;q=0.7
+
+3:
+My ip - source(192.168.0.6)
+Ip adress - destination(128.119.245.19)
+
+4:
+Code: 200
+
+5:
+Last-Modified: Mon, 02 Jun 2025 05:59:02 GMT\r\n
+
+6:
+Content-Length: 128\r\n otherwise saying 128 bytes. or File Data: 128 bytes(these are the bytes that the browser renders, it states as the server sent back the 128 bytes of image)
+
+7:
+I don't think so. Dont see the diff
+
+8:
+No I don't see it.
+
+9:
+The server explicitly returned the contents: Line-based text data: text/html (10 lines)
+I can se the returned html file
+
+10:
+I see: If-Modified-Since: Mon, 02 Jun 2025 05:59:02 GMT\r\n
+
+11:
+If-modified-since is the way of not downloading the same file from the browser if it wast modified.
+304 Not Modified, the browser uses cache instead of making a request to the server.
+
+12:
+Only 1 get message
+
+13:
+786
+
+14:
+HTTP/1.1 200 OK\r\n
+    Response Version: HTTP/1.1
+    Status Code: 200
+    [Status Code Description: OK]
+    Response Phrase: OK
+
+15:
+4 reassembled TCP Segments (4861 bytes)
+
+16:
+3 GET request messages were sent, 1 for the page, other 2 for images, because they are displayed as references to other sources. 
+Internet address1 - src="http://gaia.cs.umass.edu/pearson.png", and 2 - http://kurose.cslash.net/8E_cover_small.jpg 
+
+17:
+Serially, they the page was waiting for the servers response for each GET. 
+
+18:
+HTTP/1.1 401 Unauthorized\r\n
+    Response Version: HTTP/1.1
+    Status Code: 401
+    [Status Code Description: Unauthorized]
+    Response Phrase: Unauthorized
+
+19:
+Authorization: Basic d2lyZXNoYXJrLXN0dWRlbnRzOm5ldHdvcms=\r\n
+    Credentials: wireshark-students:network
+
+Base 64 format.
+
+
